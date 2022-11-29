@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MoviesCore
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<style>
+	.navbar-nav {
+		flex-direction:row;
+		justify-content: space-around;
+	}
+</style>
+<ul class="navbar-nav">
+	@if (SignInManager.IsSignedIn(User))
+	{
+		<li class="nav-item">
+			<a class="nav-link text-dark"asp-controller="Bookmark" asp-action="Index" title="Bookmark"><i class="fa-solid fa-bookmark" style="color:white"></i></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa-solid fa-user" style="color:white"></i></a>
+		</li>
+		<li class="nav-item">
+			<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+				<button type="submit" class="nav-link btn btn-link text-dark"><i class="fa-solid fa-right-to-bracket" style="color:white"></i></button>
+			</form>
+		</li>
+	}
+	else
+	{
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+		</li>
+	}
+</ul>

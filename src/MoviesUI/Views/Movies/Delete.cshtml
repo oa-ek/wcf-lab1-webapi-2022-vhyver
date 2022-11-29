@@ -1,0 +1,27 @@
+﻿@using MoviesCore
+@model Movie
+@{
+	ViewData["Title"] = "Delete";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+	#bewhite{
+		color: white; 
+	}
+	.dl{
+		border:1px solid white ;
+	}
+
+</style>
+<div class="container">
+	<h3 id="bewhite">Delete</h3>
+	<h4 id="bewhite">Do you really want to delete @Model.Title ?</h4>
+		<hr />
+		<dl class=row">
+		</dl>
+		<form method="post" asp-action="Delete">
+			<input type="hidden" asp-for="Id">
+			<input type="submit" value="Delete" class="btn btn-danger" />
+		<a asp-action="Index" id="bewhite">Back</a>
+		</form>
+</div>

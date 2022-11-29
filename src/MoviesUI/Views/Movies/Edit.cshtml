@@ -1,0 +1,69 @@
+﻿@using MoviesCore
+@using MoviesRepository
+@model Movie
+@{
+}
+<style>
+	.form-group {
+		color: white;
+		font-size: 20px;
+	}
+	#bewhite{
+		color:white;
+	}
+</style>
+
+<div class="container">
+	<h3 id="bewhite">Edit Movie</h3>
+	<hr />
+	<form asp-action="Edit" class="form-group">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		@Html.HiddenFor(model => model.Id)
+		<div class="form-group">
+			<label asp-for="Title" class="control-label"></label>
+			<input asp-for="Title" class="form-control" />
+			<span asp-validation-for="Title" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="Description" class="control-label"></label>
+			<input asp-for="Description" class="form-control" />
+			<span asp-validation-for="Description" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="PosterPath" class="control-label"></label>
+			<input asp-for="PosterPath" class="form-control" />
+			<span asp-validation-for="PosterPath" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="Rating" class="control-label"></label>
+			<input asp-for="Rating" class="form-control" />
+			<span asp-validation-for="Rating" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="ReleaseYear" class="control-label"></label>
+			<input asp-for="ReleaseYear" class="form-control" />
+			<span asp-validation-for="ReleaseYear" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="Duration" class="control-label"></label>
+			<input asp-for="Duration" class="form-control" />
+			<span asp-validation-for="Duration" class="text-danger"></span>
+		</div>
+		<div class ="form-group">
+			<label class="control-label"> Choose Genres</label>
+			<input type="submit" value="Create" class="btn btn-outline-success float-right" />
+			<div class="genresInput">
+				@{
+
+					List<Genre> genres = ViewBag.Genres;
+					foreach (Genre c in genres)
+					{
+								<input type="checkbox" name="selectedGenres" value="@c.Id"
+							   	@(Model.Genres.Contains(c) ? "checked=\"checked\"" : "") /> @c.GenreName <br />
+					}
+				}
+			</div>
+			
+		</div>
+	</form>
+</div>
