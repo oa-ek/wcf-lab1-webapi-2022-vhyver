@@ -22,12 +22,12 @@ namespace MoviesRepository
 			this.roleManager = roleManager;
 		}
 
-        public async Task<IEnumerable<UserReadDTO>> GetAllUsers()
+        public async Task<IEnumerable<UsersDTO>> GetAllUsers()
         {
-			var users = new List<UserReadDTO>();
+			var users = new List<UsersDTO>();
 			foreach(var u in _ctx.Users.ToList())
 			{
-				var userDTO = new UserReadDTO
+				var userDTO = new UsersDTO
 				{
 					Id = u.Id,
 					Email = u.Email,

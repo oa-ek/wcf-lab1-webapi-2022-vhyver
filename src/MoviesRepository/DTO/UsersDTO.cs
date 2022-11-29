@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MoviesRepository.DTO
 {
-	public class UserReadDTO
+	public class UsersDTO
 	{
 		public string Id { get; set; }
 		public string FullName { get; set; }
