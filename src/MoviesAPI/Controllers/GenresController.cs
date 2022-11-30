@@ -16,7 +16,7 @@ namespace MoviesAPI.Controllers
         }
 
         /// <summary>
-        /// Returns async list of genresfrom repository
+        /// Returns async list of genres from repository
         /// </summary>
         /// <returns></returns>
         [HttpGet]

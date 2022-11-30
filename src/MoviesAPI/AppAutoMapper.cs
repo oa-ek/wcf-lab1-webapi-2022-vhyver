@@ -13,6 +13,9 @@ namespace MoviesAPI
 
             CreateMap<GenresDto, Genre>();
             CreateMap<Genre, GenresDto>();
+
+            CreateMap<ActorsDto, Actor>();
+            CreateMap<Actor, ActorsDto>();
         }
     }
 }

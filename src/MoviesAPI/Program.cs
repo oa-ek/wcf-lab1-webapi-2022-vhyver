@@ -31,6 +31,7 @@ builder.Services.AddAutoMapper(typeof(AppAutoMapper).Assembly);
 
 builder.Services.AddScoped<MoviesRepository>();
 builder.Services.AddScoped<GenresRepository>();
+builder.Services.AddScoped<ActorsRepository>();
 
 var app = builder.Build();
 
