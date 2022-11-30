@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MoviesCore;
-using MoviesRepository;
+using MoviesShared;
 
 namespace MoviesUI.Controllers
 {

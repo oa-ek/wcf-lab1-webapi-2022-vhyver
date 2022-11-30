@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
-using MoviesRepository;
+using MoviesShared;
 using System.Diagnostics;
 
 namespace MoviesUI.Controllers

@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
-using MoviesRepository.DTO;
+using MoviesShared.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoviesRepository
+namespace MoviesShared
 {
 	public class UsersRepository
 	{

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
-using MoviesRepository;
+using MoviesShared;
 
 var builder = WebApplication.CreateBuilder(args);
 
