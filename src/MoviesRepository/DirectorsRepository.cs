@@ -1,4 +1,7 @@
-﻿using MoviesCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using MoviesCore;
+using MoviesShared.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +13,15 @@ namespace MoviesShared
     public class DirectorsRepository
     {
         private readonly MoviesDbContext _ctx;
-        public DirectorsRepository(MoviesDbContext ctx)
+        private readonly IMapper _mapper;
+        public DirectorsRepository(MoviesDbContext ctx, IMapper mapper)
         {
             _ctx = ctx;
+            _mapper = mapper;
+        }
+        public async Task<IEnumerable<DirectorsDto>> GetDirectorsAsync()
+        {
+            return _mapper.Map<IEnumerable<DirectorsDto>>(await _ctx.Directors.ToListAsync());
         }
 
         public List<Director> GetAllActors()

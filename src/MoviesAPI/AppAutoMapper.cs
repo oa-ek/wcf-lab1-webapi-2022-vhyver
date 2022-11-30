@@ -16,6 +16,9 @@ namespace MoviesAPI
 
             CreateMap<ActorsDto, Actor>();
             CreateMap<Actor, ActorsDto>();
+
+            CreateMap<DirectorsDto, Director>();
+            CreateMap<Director, DirectorsDto>();
         }
     }
 }
