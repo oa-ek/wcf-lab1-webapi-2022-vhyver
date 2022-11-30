@@ -27,5 +27,26 @@ namespace MoviesAPI.Controllers
         {
             return await moviesRepository.GetMoviesAsync();
         }
+
+        /// <summary>
+        /// Get movie by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<Movie> GetMovieByIdAsync(int id)
+        {
+            return await moviesRepository.GetMovie(id);
+        }
+
+        /// <summary>
+        /// Delete movie by id
+        /// </summary>
+        /// <param name="id"></param>
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
+        {
+            await moviesRepository.DeleteMovie(id);
+        }
     }
 }

@@ -21,15 +21,17 @@ namespace MoviesShared
         {
             return _mapper.Map<IEnumerable<MoviesDto>>( await _ctx.Movies.ToListAsync());
         }
-        public List<Movie> GetAllMovies()
-        {
-            return _ctx.Movies.ToList();
-        }
 
-        public Movie GetMovieById(int ID)
+        public async Task<Movie> GetMovie(int id)
         {
-            return _ctx.Movies.FirstOrDefault(x => x.Id == ID);
+            var movie = _ctx.Movies?.Include(x => x.Directors).Include(x => x.Actors).
+                Include(x => x.Genres).Include(x => x.Country).Include(x => x.Type).FirstOrDefault(x => x.Id == id);
+            return movie;
         }
-
+        public async Task DeleteMovie(int id)
+        {
+            _ctx.Movies.Remove(_ctx.Movies.Find(id));
+            _ctx.SaveChanges();
+        }
     }
 }
