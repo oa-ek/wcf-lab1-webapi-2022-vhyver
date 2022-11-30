@@ -27,6 +27,5 @@ namespace MoviesAPI.Controllers
         {
             return await moviesRepository.GetMoviesAsync();
         }
-
     }
 }

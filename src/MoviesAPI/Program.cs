@@ -19,9 +19,9 @@ builder.Services.AddSwaggerGen(options =>
         Title= "Movies Website Project API",
         Description = "Educational project"
     });
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    options.IncludeXmlComments(xmlPath);
+    //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    //options.IncludeXmlComments(xmlPath);
 });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -30,6 +30,7 @@ builder.Services.AddDbContext<MoviesDbContext>(options => options.UseSqlServer(c
 builder.Services.AddAutoMapper(typeof(AppAutoMapper).Assembly);
 
 builder.Services.AddScoped<MoviesRepository>();
+builder.Services.AddScoped<GenresRepository>();
 
 var app = builder.Build();
 

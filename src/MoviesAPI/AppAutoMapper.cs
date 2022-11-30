@@ -10,6 +10,9 @@ namespace MoviesAPI
         {
             CreateMap<MoviesDto, Movie>();
             CreateMap<Movie, MoviesDto>();
+
+            CreateMap<GenresDto, Genre>();
+            CreateMap<Genre, GenresDto>();
         }
     }
 }
