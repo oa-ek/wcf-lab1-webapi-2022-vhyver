@@ -19,14 +19,20 @@ namespace MoviesShared
             _ctx = ctx;
             _mapper = mapper;
         }
+
+        //GET ALL
         public async Task<IEnumerable<DirectorsDto>> GetDirectorsAsync()
         {
             return _mapper.Map<IEnumerable<DirectorsDto>>(await _ctx.Directors.ToListAsync());
         }
 
-        public List<Director> GetAllActors()
+        //CREATE
+
+        //DELETE
+        public async Task DeleteDirector(int id)
         {
-            return _ctx.Directors.ToList();
+            _ctx.Directors.Remove(_ctx.Directors.Find(id));
+            _ctx.SaveChanges();
         }
     }
 }

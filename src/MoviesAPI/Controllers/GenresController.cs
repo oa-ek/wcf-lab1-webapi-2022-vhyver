@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MoviesShared.DTO;
 using MoviesShared;
+using Microsoft.EntityFrameworkCore;
+using MoviesCore;
+using MoviesShared.DTO.Genres;
 
 namespace MoviesAPI.Controllers
 {
@@ -20,9 +22,29 @@ namespace MoviesAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<GenresDto>> GetListAsync()
+        public async Task<IEnumerable<GenresReadDto>> GetListAsync()
         {
             return await genresRepository.GetGenresAsync();
+        }
+
+        /// <summary>
+        /// Create genre
+        /// </summary>
+        /// <param name="name"></param>
+        [HttpPost]
+        public async Task<int> AddGenre(GenresCreateUpdateDto dto)
+        {
+            return await genresRepository.AddGenre(dto);
+        }
+
+        /// <summary>
+        /// Delete genre by id
+        /// </summary>
+        /// <param name="id"></param>
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
+        {
+            await genresRepository.DeleteGenre(id);
         }
     }
 }

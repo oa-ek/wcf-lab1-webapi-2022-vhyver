@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MoviesCore;
 using MoviesShared.DTO;
+using MoviesShared.DTO.Genres;
+using MoviesShared.DTO.Movies;
 
 namespace MoviesAPI
 {
@@ -8,17 +10,25 @@ namespace MoviesAPI
     {
         public AppAutoMapper()
         {
-            CreateMap<MoviesDto, Movie>();
-            CreateMap<Movie, MoviesDto>();
+            CreateMap<MoviesReadDto, Movie>();
+            CreateMap<Movie, MoviesReadDto>();
 
-            CreateMap<GenresDto, Genre>();
-            CreateMap<Genre, GenresDto>();
+            CreateMap<GenresReadDto, Genre>();
+            CreateMap<Genre, GenresReadDto>();
+
+            CreateMap<GenresCreateUpdateDto, Genre>();
+            CreateMap<Genre, GenresCreateUpdateDto>();
 
             CreateMap<ActorsDto, Actor>();
             CreateMap<Actor, ActorsDto>();
 
             CreateMap<DirectorsDto, Director>();
             CreateMap<Director, DirectorsDto>();
+
+            CreateMap<UsersDto, User>();
+            CreateMap<User, UsersDto>();
+
+            CreateMap<PublisherCountry, PublisherCountryDto>();
         }
     }
 }

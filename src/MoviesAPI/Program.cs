@@ -3,6 +3,7 @@ using MoviesAPI;
 using MoviesCore;
 using MoviesShared;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,11 +29,12 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<MoviesDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddAutoMapper(typeof(AppAutoMapper).Assembly);
-
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddScoped<MoviesRepository>();
 builder.Services.AddScoped<GenresRepository>();
 builder.Services.AddScoped<ActorsRepository>();
 builder.Services.AddScoped<DirectorsRepository>();
+//builder.Services.AddScoped<UsersRepository>();
 
 var app = builder.Build();
 

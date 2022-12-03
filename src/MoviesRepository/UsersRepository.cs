@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MoviesShared;
+using Microsoft.AspNetCore.Identity;
+using AutoMapper;
 
 namespace MoviesShared
 {
@@ -15,33 +18,26 @@ namespace MoviesShared
         private readonly MoviesDbContext _ctx;
 		private readonly UserManager<User> userManager;
 		private readonly RoleManager<IdentityRole> roleManager;
-		public UsersRepository(MoviesDbContext ctx, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly IMapper _mapper;
+        public UsersRepository(MoviesDbContext ctx, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper)
 		{
 			_ctx = ctx;
 			this.userManager = userManager;
 			this.roleManager = roleManager;
+			_mapper = mapper;
 		}
 
-        public async Task<IEnumerable<UsersDTO>> GetAllUsers()
+		//GET ALL
+        public async Task<IEnumerable<UsersDto>> GetUsersAsync()
         {
-			var users = new List<UsersDTO>();
-			foreach(var u in _ctx.Users.ToList())
-			{
-				var userDTO = new UsersDTO
-				{
-					Id = u.Id,
-					Email = u.Email,
-					FullName = $"{u.LastName} {u.FirstName}",
-					IsConfirmed = u.EmailConfirmed,
-					Roles = new List<IdentityRole>()
-				};
-				foreach(var role in await userManager.GetRolesAsync(u))
-				{
-					userDTO.Roles.Add(await _ctx.Roles.FirstAsync(x => x.Name.ToLower() == role.ToLower()));
-				}
-				users.Add(userDTO);
-			}
-            return users;
+            return _mapper.Map<IEnumerable<UsersDto>>(await _ctx.Users.ToListAsync());
+        }
+
+        //DELETE
+        public async Task DeleteUser(int id)
+        {
+            _ctx.Users.Remove(_ctx.Users.Find(id));
+            _ctx.SaveChanges();
         }
     }
 }

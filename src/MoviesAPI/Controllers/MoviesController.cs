@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
 using MoviesShared;
-using MoviesShared.DTO;
+using MoviesShared.DTO.Movies;
 
 namespace MoviesAPI.Controllers
 {
@@ -23,7 +23,7 @@ namespace MoviesAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<MoviesDto>> GetListAsync()
+        public async Task<IEnumerable<MoviesReadDto>> GetListAsync()
         {
             return await moviesRepository.GetMoviesAsync();
         }
@@ -38,6 +38,10 @@ namespace MoviesAPI.Controllers
         {
             return await moviesRepository.GetMovie(id);
         }
+
+        //create
+
+        //edit
 
         /// <summary>
         /// Delete movie by id

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoviesShared.DTO
+namespace MoviesShared.DTO.Genres
 {
-    public class GenresDto
+    public class GenresCreateUpdateDto
     {
-        public int Id { get; set; }
         public string? GenreName { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
-using MoviesShared.DTO;
+using MoviesShared.DTO.Genres;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,16 +20,25 @@ namespace MoviesShared
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<GenresDto>> GetGenresAsync()
+        //GET ALL
+        public async Task<IEnumerable<GenresReadDto>> GetGenresAsync()
         {
-            return _mapper.Map<IEnumerable<GenresDto>>(await _ctx.Genres.ToListAsync());
+            return _mapper.Map<IEnumerable<GenresReadDto>>(await _ctx.Genres.ToListAsync());
         }
 
-        public List<Genre> GetGenres()
+        //CREATE
+        public async Task<int> AddGenre(GenresCreateUpdateDto genre)
         {
-            return _ctx.Genres.ToList();
+            var data = await _ctx.Genres.AddAsync(_mapper.Map<Genre>(genre));
+            await _ctx.SaveChangesAsync();
+            return data.Entity.Id;
         }
-
+        //DELETE
+        public async Task DeleteGenre(int id)
+        {
+            _ctx.Genres.Remove(_ctx.Genres.Find(id));
+            await _ctx.SaveChangesAsync();
+        }
     }
 }
   

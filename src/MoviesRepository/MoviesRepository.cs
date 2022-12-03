@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
-using MoviesShared.DTO;
+using MoviesShared.DTO.Movies;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MoviesShared
@@ -17,17 +17,26 @@ namespace MoviesShared
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<MoviesDto>> GetMoviesAsync()
+        //GET ALL
+        public async Task<IEnumerable<MoviesReadDto>> GetMoviesAsync()
         {
-            return _mapper.Map<IEnumerable<MoviesDto>>( await _ctx.Movies.ToListAsync());
+            return _mapper.Map<IEnumerable<MoviesReadDto>>(await _ctx.Movies.Include(x => x.Country).ToListAsync());
         }
 
+        //GET ONE
         public async Task<Movie> GetMovie(int id)
         {
             var movie = _ctx.Movies?.Include(x => x.Directors).Include(x => x.Actors).
                 Include(x => x.Genres).Include(x => x.Country).Include(x => x.Type).FirstOrDefault(x => x.Id == id);
+
             return movie;
         }
+
+        //CREATE
+
+        //EDIT
+
+        //DELETE
         public async Task DeleteMovie(int id)
         {
             _ctx.Movies.Remove(_ctx.Movies.Find(id));

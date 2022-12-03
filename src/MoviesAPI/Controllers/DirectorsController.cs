@@ -24,5 +24,16 @@ namespace MoviesAPI.Controllers
         {
             return await directorsRepository.GetDirectorsAsync();
         }
+        //create
+
+        /// <summary>
+        /// Delete director by id
+        /// </summary>
+        /// <param name="id"></param>
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
+        {
+            await directorsRepository.DeleteDirector(id);
+        }
     }
 }

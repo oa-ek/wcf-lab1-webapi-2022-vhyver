@@ -24,5 +24,17 @@ namespace MoviesAPI.Controllers
         {
             return await actorsRepository.GetActorsAsync();
         }
+
+        //create
+
+        /// <summary>
+        /// Delete actor by id
+        /// </summary>
+        /// <param name="id"></param>
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
+        {
+            await actorsRepository.DeleteActor(id);
+        }
     }
 }
