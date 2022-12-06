@@ -32,7 +32,7 @@ namespace MoviesAPI.Controllers
         /// Create publisher
         /// </summary>
         /// /// <param name="dto"></param>
-        [HttpPost("new")]
+        [HttpPost]
         public async Task<int> AddPublisher(PublishersCreateUpdateDto dto)
         {
             return await publishersRepository.AddPublisher(dto);

@@ -44,7 +44,7 @@ namespace MoviesAPI.Controllers
         /// Create movie
         /// </summary>
         /// <param name="dto"></param>
-        [HttpPost("new")]
+        [HttpPost]
         public async Task<int> AddMovie(MoviesCreateUpdateDto dto)
         {
             return await moviesRepository.AddMovie(dto);

@@ -30,7 +30,7 @@ namespace MoviesAPI.Controllers
         /// Create director
         /// </summary>
         /// /// <param name="dto"></param>
-        [HttpPost("new")]
+        [HttpPost]
         public async Task<int> AddDirector(DirectorsCreateUpdateDto dto)
         {
             return await directorsRepository.AddDirector(dto);

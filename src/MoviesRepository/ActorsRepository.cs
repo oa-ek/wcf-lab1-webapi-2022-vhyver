@@ -6,6 +6,8 @@ using MoviesShared.DTO.Genres;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,6 +37,17 @@ namespace MoviesShared
             return data.Entity.Id;
         }
 
+        //EDIT
+        public async Task<int> UpdateActor(ActorsReadDto newActor)
+        {
+            var actorInDB = _ctx.Actors.FirstOrDefault(x => x.Id == newActor.Id);
+            actorInDB.FirstName = newActor.FirstName;
+            actorInDB.LastName = newActor.LastName;
+            await _ctx.SaveChangesAsync();
+
+            var data = _mapper.Map<ActorsReadDto>(actorInDB);
+            return data.Id;
+        }
         //DELETE
         public async Task DeleteActor(int id)
         {

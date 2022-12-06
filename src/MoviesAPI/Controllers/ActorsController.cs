@@ -30,10 +30,20 @@ namespace MoviesAPI.Controllers
         /// Create actor
         /// </summary>
         /// /// <param name="dto"></param>
-        [HttpPost("new")]
+        [HttpPost]
         public async Task<int> AddActor(ActorsCreateUpdateDto dto)
         {
             return await actorsRepository.AddActor(dto);
+        }
+
+        /// <summary>
+        /// Method updates brand in db
+        /// </summary>
+        /// <param name="id"></param>
+        [HttpPut("{id}")]
+        public async Task<int> EditActor(ActorsReadDto actor)
+        {
+            return await actorsRepository.UpdateActor(actor);
         }
 
         /// <summary>
