@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoviesShared.DTO
+namespace MoviesShared.DTO.Publishers
 {
-    public class PublisherCountryDto
+    public class PublishersReadDto
     {
         public int Id { get; set; }
         public string? CountryName { get; set; }

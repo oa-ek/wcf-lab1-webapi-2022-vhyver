@@ -1,4 +1,6 @@
 ﻿using MoviesCore;
+using MoviesShared.DTO.Genres;
+using MoviesShared.DTO.Publishers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,7 @@ namespace MoviesShared.DTO.Movies
         public float? Rating { get; set; }
         public int ReleaseYear { get; set; }
         public int Duration { get; set; }
-        public PublisherCountryDto? Country { get; set; }
+        public PublishersReadDto? Country { get; set; }
+        public ICollection<GenresReadDto>? Genres { get; set; } = new List<GenresReadDto>();
     }
 }

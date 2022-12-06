@@ -30,8 +30,8 @@ namespace MoviesAPI.Controllers
         /// <summary>
         /// Create genre
         /// </summary>
-        /// <param name="name"></param>
-        [HttpPost]
+        /// <param name="dto"></param>
+        [HttpPost("new")]
         public async Task<int> AddGenre(GenresCreateUpdateDto dto)
         {
             return await genresRepository.AddGenre(dto);

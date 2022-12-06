@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
 using MoviesShared;
+using MoviesShared.DTO.Genres;
 using MoviesShared.DTO.Movies;
 
 namespace MoviesAPI.Controllers
@@ -39,8 +40,15 @@ namespace MoviesAPI.Controllers
             return await moviesRepository.GetMovie(id);
         }
 
-        //create
-
+        /// <summary>
+        /// Create movie
+        /// </summary>
+        /// <param name="dto"></param>
+        [HttpPost("new")]
+        public async Task<int> AddMovie(MoviesCreateUpdateDto dto)
+        {
+            return await moviesRepository.AddMovie(dto);
+        }
         //edit
 
         /// <summary>

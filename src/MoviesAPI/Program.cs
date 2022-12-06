@@ -34,6 +34,7 @@ builder.Services.AddScoped<MoviesRepository>();
 builder.Services.AddScoped<GenresRepository>();
 builder.Services.AddScoped<ActorsRepository>();
 builder.Services.AddScoped<DirectorsRepository>();
+builder.Services.AddScoped<PublishersRepository>();
 //builder.Services.AddScoped<UsersRepository>();
 
 var app = builder.Build();

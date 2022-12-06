@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
-using MoviesShared.DTO;
+using MoviesShared.DTO.Actors;
+using MoviesShared.DTO.Directors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,18 @@ namespace MoviesShared
         }
 
         //GET ALL
-        public async Task<IEnumerable<DirectorsDto>> GetDirectorsAsync()
+        public async Task<IEnumerable<DirectorsReadDto>> GetDirectorsAsync()
         {
-            return _mapper.Map<IEnumerable<DirectorsDto>>(await _ctx.Directors.ToListAsync());
+            return _mapper.Map<IEnumerable<DirectorsReadDto>>(await _ctx.Directors.ToListAsync());
         }
 
         //CREATE
+        public async Task<int> AddDirector(DirectorsCreateUpdateDto director)
+        {
+            var data = await _ctx.Directors.AddAsync(_mapper.Map<Director>(director));
+            await _ctx.SaveChangesAsync();
+            return data.Entity.Id;
+        }
 
         //DELETE
         public async Task DeleteDirector(int id)

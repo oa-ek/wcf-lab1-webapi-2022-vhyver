@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MoviesShared.DTO;
 using MoviesShared;
+using MoviesShared.DTO.Actors;
+using MoviesShared.DTO.Directors;
 
 namespace MoviesAPI.Controllers
 {
@@ -20,11 +21,20 @@ namespace MoviesAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<DirectorsDto>> GetListAsync()
+        public async Task<IEnumerable<DirectorsReadDto>> GetListAsync()
         {
             return await directorsRepository.GetDirectorsAsync();
         }
-        //create
+
+        /// <summary>
+        /// Create director
+        /// </summary>
+        /// /// <param name="dto"></param>
+        [HttpPost("new")]
+        public async Task<int> AddDirector(DirectorsCreateUpdateDto dto)
+        {
+            return await directorsRepository.AddDirector(dto);
+        }
 
         /// <summary>
         /// Delete director by id

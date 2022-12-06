@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
+using MoviesShared.DTO.Genres;
 using MoviesShared.DTO.Movies;
 using System.Diagnostics.CodeAnalysis;
 
@@ -33,7 +34,31 @@ namespace MoviesShared
         }
 
         //CREATE
-
+        public async Task<int> AddMovie(MoviesCreateUpdateDto movie)
+        {
+            var newMovie = new Movie
+            {
+                Title = movie.Title,
+                Description = movie.Description,
+                PosterPath = movie.PosterPath,
+                Rating = movie.Rating,
+                ReleaseYear = movie.ReleaseYear,
+                Duration = movie.Duration,
+            };
+            if (movie.Genres != null)
+            {
+                newMovie.Genres = new List<Genre>();
+                foreach (var g in _ctx.Genres.Where(ge => movie.Genres.Contains(ge.Id)))
+                {
+                    newMovie.Genres.Add(g);
+                }
+            }
+            if (movie.CountryId != 0) newMovie.Country = _ctx.PublisherCountries.FirstOrDefault(x => x.Id == movie.CountryId);
+            
+            _ctx.Movies?.Add(newMovie);
+            await _ctx.SaveChangesAsync();
+            return newMovie.Id;
+        }
         //EDIT
 
         //DELETE
