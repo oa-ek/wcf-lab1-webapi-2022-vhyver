@@ -1,0 +1,47 @@
+﻿@page "/movie/new"
+
+@using MoviesShared;
+@using MoviesShared.DTO;
+
+<h3>MovieCreate</h3>
+@inject MoviesRepository movieRepository
+
+<h1>Список фільмів</h1>
+
+<div class="row">
+	<div class="col-3">
+		<label>Назва фільму</label>
+		<input type="text" @bind-value=MovieTitle class="form-control"/>
+		<input type="text" @bind-value=MovieDescription class="form-control" />
+		<input type="text" @bind-value=MoviePoster class="form-control" />
+		<input type="text" @bind-value=MovieRating class="form-control" />
+		<input type="text" @bind-value=MovieReleaseYear class="form-control" />
+		<input type="text" @bind-value=MovieDuration class="form-control" />
+		<button type="submit" class="btn btn-primary"></button>
+	</div>
+</div>
+
+@code {
+	private string MovieTitle = "";
+	private string MovieDescription = "";
+	private string MoviePoster = "";
+	private int MovieRating = 0;
+	private int MovieReleaseYear = 0;
+	private int MovieDuration = 0;
+	private int MovieCountry = 0;
+
+	async Task SaveMovieAsync()
+	{
+		var response = movieRepository.AddMovie(new MoviesShared.DTO.Movies.MoviesCreateUpdateDto
+			{
+				Title = MovieTitle,
+				Description = MovieDescription,
+				PosterPath = MoviePoster,
+				Rating = MovieRating,
+				Duration = MovieDuration,
+				ReleaseYear = MovieReleaseYear,
+				CountryId = MovieCountry,
+
+			});
+	}
+}

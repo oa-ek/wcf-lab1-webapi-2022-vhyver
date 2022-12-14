@@ -1,0 +1,42 @@
+﻿@using System.Globalization;
+@using MoviesShared.DTO.Movies;
+
+@inject NavigationManager Navigation
+
+<div class="card">
+    <div style="background-color:#ccc; background-image:url(/api/movies/@Movie.Id/photos/view?@(new Random().NextDouble())); background-size: cover; background-position:center center; height: 200px; width: 100%; position: relative">
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@Movie.Title</h5>
+        <p class="card-text">@((MarkupString)Movie.Description)</p>
+
+        <div class="row">
+            <div class="col-6">
+                Дата:
+                <strong>@Movie.ReleaseYear.ToString("dd.MM.yyyy", new CultureInfo("en"))</strong>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-6">
+                @Movie.Rating
+                @Movie.Duration
+            </div>
+        </div>       
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public MoviesReadDto? Movie { get; set; }
+
+    void GoToDetailsPage()
+    {
+        Navigation.NavigateTo($"/requests/{Movie.Id}");
+    }
+
+    void GoToEditPage()
+    {
+        Navigation.NavigateTo($"/requests/edit/{Movie.Id}");
+    }
+}

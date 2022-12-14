@@ -1,0 +1,42 @@
+﻿@using MoviesShared.DTO
+@using MoviesShared
+@using MoviesShared.DTO.Movies;
+@using MoviesAPI.Services;
+
+@page "/"
+
+<PageTitle>Movies</PageTitle>
+
+@inject HttpMovieService movieService
+
+<h1>Список фільмів</h1>
+
+@if(Movies is not null && Movies.Any())
+{
+    <div class="row">
+        @foreach (var m in Movies)
+        {
+            <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                <MovieCardComponent Movie="m"></MovieCardComponent>
+            </div>
+        }
+    </div>
+} 
+else if(Movies is not null)
+{
+    <span Severity="MessageSeverity.Warning">Інформація про запити відсутня...</span>
+
+} else
+{
+    <SpinnerComponent></SpinnerComponent>
+}
+@code{
+
+    private IEnumerable<MoviesReadDto> Movies = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Movies = await movieService.GetMoviesAsync();
+    }
+
+}

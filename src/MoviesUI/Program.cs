@@ -1,59 +1,52 @@
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
+using MoviesAPI;
+using MoviesAPI.Services;
 using MoviesCore;
 using MoviesShared;
+using MoviesUI.Data;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
+builder.Services.AddSingleton<WeatherForecastService>();
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MoviesDbContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddAutoMapper(typeof(AppAutoMapper).Assembly);
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddScoped<MoviesRepository>();
+builder.Services.AddScoped<GenresRepository>();
+builder.Services.AddScoped<ActorsRepository>();
+builder.Services.AddScoped<DirectorsRepository>();
+builder.Services.AddScoped<PublishersRepository>();
 
-builder.Services.AddDefaultIdentity<User>(options =>
-{
-    options.SignIn.RequireConfirmedAccount = false;
-    options.Password.RequireDigit = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 5;
-}).AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<MoviesDbContext>();
-
-
-
-builder.Services.AddControllersWithViews();
-
-//Add all repositories
-builder.Services.AddTransient<UsersRepository>();
-
+builder.Services.AddScoped<HttpClient>();
+builder.Services.AddScoped<HttpMovieService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
+    
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+app.MapBlazorHub();
+app.MapFallbackToPage("/_Host");
 
 app.Run();
